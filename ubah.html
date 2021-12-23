@@ -1,0 +1,67 @@
+<?php
+include "koneksi.php";
+
+$id_mhs=$_GET['id_mhs'];
+$query="SELECT * FROM tb_mahasiswa WHERE id_mhs='$id_mhs'";
+$tampil=mysql_quary($quary);
+$data=mysql_fetch_array($tampil);
+?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>FROM DATA MAHASISWA</title>
+</head>
+<body>
+    <fieldset>
+        <legend> FORM MAHASISWA</legend>
+        <form method="post">
+            <table border="0">
+                <tr>
+
+                <td>ID MAHASISWA</td>
+                <td><input type="text" name="id_mhs" value="<?php echo $data['id_mhs']; ?>"></td>
+            </tr>
+            <tr>
+                <td>NAMA</td>
+                <td><input type="text" name="nama" value="<?php echo $data['id_mhs']; ?>"></td>
+            </tr>
+            <tr>
+                <td>JURUSAN</td>
+                <td><input type="text" name="jurusan" value="<?php echo $data['id_mhs']; ?>"></td>
+            </tr>
+            <tr>
+                <td>MATA KULIAH</td>
+                <td><input type="text" name="mata_kuliah" value="<?php echo $data['id_mhs']; ?>"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" name="ubah" value="Simpan"></td>
+            </tr>
+        </table>
+    
+    </form>
+</fieldset>
+<body>
+</html>
+
+<?php
+//proses mengubah data
+include "koneksi.php";
+
+$id_mhs=$_POST['id_mhs'];
+$nama=$_POST['nama'];
+$jurusan=$_POST['jurusan'];
+$mata_kuliah=$_POST['mata_kuliah'];
+
+if(isset($_POST['ubah'])){
+    $update=mysql_query("UPDATE tb_mahasiswa
+                            SET nama='$nama',
+                                jurusan='$jurusan'
+                                mata_kuliah='$mata_kuliah'
+                            WHERE id_mhs='$_GET[id_mhs]'");
+if($update)
+{
+    header("location:tampil.php");
+}
+}
+?>

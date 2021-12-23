@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TAMPIL DATA MAHASISWA</title>
+</head>
+<body>
+
+<table border="1" >
+    <tr>
+        <td> NO </td>
+        <td> ID MAHASISWA </td>
+        <td> NAMA MAHASISWA </td>
+        <td> JURUSAN </td>
+        <td> MATA KULIAH </td>
+        <td> AKSI </td>
+</tr>
+<tr>
+    <?php
+    include "koneksi.php";
+
+    $query="SELECT * FROM tb_mahasiswa";
+    $tampil=mysql_query($query);
+    $no=1;
+    while($data=mysql_fetch_array($tampil)){
+    
+    ?>
+    
+    <tr>
+        <td><?php echo $no++; ?></td>
+        <td><?php echo $data['id_mhs'];?></td>
+        <td><?php echo $data['nama'];?></td>
+        <td><?php echo $data['jurusan'];?></td>
+        <td><?php echo $data['mata_kuliah'];?></td>
+        <td>
+            <a href="ubah.php?id_mhs=<?php echo $data['id_mhs'];?>"
+            onclick="return confirm('Apakah anda yakin akan mengupdate data ini?')" >Ubah</a>
+            <a href="hapus.php?id_mhs=<?php echo $data['id_mhs'];?>"
+            onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" >Hapus</a>
+
+    </td>
+
+    </tr>
+<?php 
+}
+?>
+</table>
+
+
+</body>
+</html>
